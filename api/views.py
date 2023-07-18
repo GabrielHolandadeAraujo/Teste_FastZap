@@ -80,9 +80,11 @@ def vender_produto(request, pk, qtd):
 
         produto.save()
       
-
         #Mensagem de retorno Json    
-        return JsonResponse({'message': 'Venda Realizada Com Sucesso.'})
-    else:
-        logging.info('Venda de produtos Nao Foi realizada com sucesso, Produto nao possui Estoque.')
-        return JsonResponse({'message': 'Produto sem estoque Suficiente, nao foi possivel realizar a Venda.'})
+        return JsonResponse({'message': 'Venda realizada com sucesso.'})
+    elif (qtd<=0):
+        logging.info('Venda de produtos nao foi realizada com sucesso, quantidade querida menor que 1.')
+        return JsonResponse({'message': 'quantidade requerida menor que 1, nao foi possivel realizar a Venda.'})
+    else:    
+        logging.info('Venda de produtos nao foi realizada com sucesso, Produto nao possui Estoque.')
+        return JsonResponse({'message': 'Produto sem estoque suficiente, nao foi possivel realizar a Venda.'})
