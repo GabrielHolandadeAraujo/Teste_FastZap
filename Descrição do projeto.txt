@@ -10,17 +10,17 @@ Desafio 1: Criação de uma API básica✔️
 
 Desafio 2: Processamento assíncrono
 	•	Crie uma rota para simular a venda de um produto, onde pode ser enviado o identificador do produto.✔️
-	•	Crie uma tarefa assíncrona que simule o envio de e-mail no momento da compra de um produto.
-	•	A tarefa deve receber o ID do produto como parâmetro e aguardar 5 segundos antes de imprimir uma mensagem no console, simulando o e-mail disparado.
+	•	Crie uma tarefa assíncrona que simule o envio de e-mail no momento da compra de um produto.✔️
+	•	A tarefa deve receber o ID do produto como parâmetro e aguardar 5 segundos antes de imprimir uma mensagem no console, simulando o e-mail disparado.✔️
 
 Desafio 3: Modelagem de dados avançada
 	•	Expanda o modelo "Produto" para incluir uma nova funcionalidade.✔️
 	•	Adicione um novo campo chamado "Quantidade" para representar a quantidade em estoque do produto.✔️
-	•	- Ao receber uma requisição para comprar um produto, agora você deverá receber também a quantidade de produtos para compra, a API deve verificar se há estoque suficiente e retornar uma resposta apropriada.
+	•	- Ao receber uma requisição para comprar um produto, agora você deverá receber também a quantidade de produtos para compra, a API deve verificar se há estoque suficiente e retornar uma resposta apropriada.✔️
 
 Desafio 4: Testes
 
-O seu projeto deverá conter testes de software (unitário/integração/etc)
+O seu projeto deverá conter testes de software (unitário/integração/etc)✔️
 
 Critérios de avaliação:
 	•	Capacidade de criar APIs RESTful com Django.
@@ -30,8 +30,8 @@ Critérios de avaliação:
 	•	Tratamento adequado de erros e validação de dados.
 
 Diferenciais:
-	•	Uso do Docker.
-	•	Uso de Logs.
+	•	Uso do Docker.✔️
+	•	Uso de Logs.✔️
 
 Observações:
 	•	O candidato deve fornecer o código-fonte completo do projeto (enviar o link do projeto público no GitHub).
