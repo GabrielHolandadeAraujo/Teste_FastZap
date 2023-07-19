@@ -1,12 +1,12 @@
 import logging
-
+import time
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
-
+from FastZapTest.celery import app
 from .models import Produto
 from .serializers import ProdutoSerializer
 
@@ -64,7 +64,7 @@ class ProdutoDeleteAPIView(APIView):
 #Função de Venda
 def vender_produto(request, pk, qtd):
     produto = get_object_or_404(Produto, pk=pk)
-    
+    mandarEmail.apply_async(args=[pk])
     # Realize a ação de venda aqui, como atualizar a quantidade em estoque
     if(produto.quantidade>0 and qtd>0 and produto.quantidade>=qtd):
         produto.quantidade -= qtd
@@ -75,7 +75,7 @@ def vender_produto(request, pk, qtd):
         print("Descrição:", produto.descricao)
         print("Preço:", produto.preco)
         print("Quantidade em estoque:", produto.quantidade)
-
+        
         logging.info('Venda de produtos realizada com sucesso. Produto vendido: %s. Quantidade em estoque: %s', produto.nome, produto.quantidade)
 
         produto.save()
@@ -88,3 +88,8 @@ def vender_produto(request, pk, qtd):
     else:    
         logging.info('Venda de produtos nao foi realizada com sucesso, Produto nao possui Estoque.')
         return JsonResponse({'message': 'Produto sem estoque suficiente, nao foi possivel realizar a Venda.'})
+
+@app.task(bind=True)    
+def mandarEmail(task_definition, produto_pk):
+    time.sleep(5)
+    print(f"Um e-mail foi enviado para o produto de ID {produto_pk}")
