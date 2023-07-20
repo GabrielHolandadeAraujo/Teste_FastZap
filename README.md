@@ -1,7 +1,6 @@
 
 # Teste FastZap
 
-## 1 - Para executar dentro do docker
 
 ### Preparando o ambiente
 
@@ -29,51 +28,13 @@ docker-compose build (se não funcionar adicione sudo no inicio do comando)
 docker-compose up -d (se não funcionar adicione sudo no inicio do comando)
 ```
 
-## 2- Para executar fora do docker
+## Informações de uso
 
-### Preparando o ambiente
-
-```
-sudo apt-get install python3-venv
-```
-
-#### criando o ambiente virtual
+####  Rota principal
 
 ```
-python3 -m venv venv
+  'localhost:8000/produtos/'
 ```
-
-#### Clonando o repositório
-
-```
-git clone your-url.git
-```
-
-#### Instalando os requisitos
-
-```
- pip install -r requirements.txt
-```
-
-#### Criando a base de dados
-
-```
-python manage.py migrate
-```
-
-#### Criando um super usuário
-
-```
-python manage.py createsuperuser
-```
-
-#### Executar projeto
-
-```
-  python manage.py runserver
-```
-
-## 3 - Informações de uso
 
 ####  Formato json para criar produtos
 
@@ -91,7 +52,7 @@ python manage.py createsuperuser
 #### Para realizar vendas
 
 ```
-  O formato da rota de venda é: "produtos/<id do produto>/vender/<quantidade de produtos que serão vendidos>/'
+  O formato da rota de venda é: "localhost:8000/produtos/<id do produto>/vender/<quantidade de produtos que serão vendidos>/'
 ```
 
 

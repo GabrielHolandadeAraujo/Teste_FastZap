@@ -1,12 +1,16 @@
 import logging
 import time
+
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render
 from rest_framework import status
 from rest_framework.response import Response
+from rest_framework.serializers import ValidationError
 from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
+
 from FastZapTest.celery import app
+
 from .models import Produto
 from .serializers import ProdutoSerializer
 
@@ -42,7 +46,10 @@ class ProdutoListAPIView(APIView):
 #Update
 class ProdutoUpdateAPIView(APIView):
     def put(self, request, pk):
-        produto = Produto.objects.get(pk=pk)
+        try:
+            produto = Produto.objects.get(pk=pk)
+        except:
+            raise ValidationError
         serializer = ProdutoSerializer(produto, data=request.data)
         if serializer.is_valid():
             serializer.save()            
@@ -54,7 +61,10 @@ class ProdutoUpdateAPIView(APIView):
 #Delete
 class ProdutoDeleteAPIView(APIView):
     def delete(self, request, pk):
-        produto = Produto.objects.get(pk=pk)
+        try:
+            produto = Produto.objects.get(pk=pk)
+        except:
+            raise ValidationError
         produto.delete()
         logging.info('Delete de produtos realizada com sucesso')
         return Response(status=status.HTTP_204_NO_CONTENT)
@@ -63,7 +73,10 @@ class ProdutoDeleteAPIView(APIView):
 
 #Função de Venda
 def vender_produto(request, pk, qtd):
-    produto = get_object_or_404(Produto, pk=pk)
+    try:
+        produto = Produto.objects.get(pk=pk)
+    except:
+        raise ValidationError
     mandarEmail.apply_async(args=[pk])
     # Realize a ação de venda aqui, como atualizar a quantidade em estoque
     if(produto.quantidade>0 and qtd>0 and produto.quantidade>=qtd):
